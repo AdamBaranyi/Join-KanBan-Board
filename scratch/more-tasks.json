@@ -1,0 +1,92 @@
+{
+  "task4": {
+    "id": "task4",
+    "title": "Implement User Authentication",
+    "description": "Set up Firebase authentication and integrate it into the login and registration pages.",
+    "dueDate": "2026-10-10",
+    "category": "Technical Task",
+    "priority": "Urgent",
+    "status": "awaitingFeedback",
+    "assignedTo": ["contact1", "contact2"],
+    "subtasks": [
+      {"title": "Setup Firebase Auth", "completed": true},
+      {"title": "Create Login Page", "completed": true},
+      {"title": "Create Registration Page", "completed": false}
+    ]
+  },
+  "task5": {
+    "id": "task5",
+    "title": "Setup Continuous Integration",
+    "description": "Create a GitHub Actions workflow to automatically build and deploy the app.",
+    "dueDate": "2026-09-20",
+    "category": "Technical Task",
+    "priority": "Medium",
+    "status": "todo",
+    "assignedTo": ["contact3"],
+    "subtasks": [
+      {"title": "Write GitHub Actions workflow", "completed": false},
+      {"title": "Configure secrets", "completed": false},
+      {"title": "Test pipeline", "completed": false}
+    ]
+  },
+  "task6": {
+    "id": "task6",
+    "title": "Write Documentation",
+    "description": "Create comprehensive documentation for the project, including a README and a user guide.",
+    "dueDate": "2026-09-25",
+    "category": "User Story",
+    "priority": "Low",
+    "status": "inProgress",
+    "assignedTo": ["contact2", "contact3"],
+    "subtasks": [
+      {"title": "README.md", "completed": true},
+      {"title": "API Docs", "completed": false},
+      {"title": "User Guide", "completed": false}
+    ]
+  },
+  "task7": {
+    "id": "task7",
+    "title": "Fix Styling Bugs",
+    "description": "Address various styling issues reported during QA.",
+    "dueDate": "2026-09-12",
+    "category": "Technical Task",
+    "priority": "Urgent",
+    "status": "done",
+    "assignedTo": ["contact1"],
+    "subtasks": [
+      {"title": "Fix Edit Task Modal", "completed": true},
+      {"title": "Adjust priority icons", "completed": true},
+      {"title": "Remove scrollbars", "completed": true}
+    ]
+  },
+  "task8": {
+    "id": "task8",
+    "title": "Add Animation to Login",
+    "description": "Create a smooth entrance animation for the login screen. Ensure it only plays once using LocalStorage.",
+    "dueDate": "2026-10-15",
+    "category": "User Story",
+    "priority": "Medium",
+    "status": "awaitingFeedback",
+    "assignedTo": ["contact1", "contact3"],
+    "subtasks": [
+      {"title": "Design animation", "completed": true},
+      {"title": "Implement CSS keyframes", "completed": true},
+      {"title": "Add LocalStorage check", "completed": true}
+    ]
+  },
+  "task9": {
+    "id": "task9",
+    "title": "Refactor Session Logic",
+    "description": "Move the session handling logic into a separate utility file to keep components clean.",
+    "dueDate": "2026-09-30",
+    "category": "Technical Task",
+    "priority": "Low",
+    "status": "inProgress",
+    "assignedTo": ["contact2"],
+    "subtasks": [
+      {"title": "Create session.ts", "completed": true},
+      {"title": "Update Login.tsx", "completed": false},
+      {"title": "Update Header.tsx", "completed": false}
+    ]
+  }
+}

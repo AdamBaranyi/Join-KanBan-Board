@@ -1,0 +1,219 @@
+/* ── Register-Seite (portiert aus dem Original, scoped unter .register-page) ── */
+
+.register-page header {
+  height: 120px;
+  width: 100%;
+}
+.register-page .logo {
+  margin-top: 80px;
+  margin-left: 70px;
+  height: 121px;
+  width: 100px;
+}
+
+.register-page .container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 13px;
+}
+
+.register-page .card {
+  background: var(--color-bg);
+  width: 100%;
+  max-width: 600px;
+  padding: 60px 89px;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.register-page .title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.register-page .back-arrow {
+  position: absolute;
+  left: 0;
+  width: 24px;
+  cursor: pointer;
+}
+.register-page h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+.register-page .underline {
+  width: 150px;
+  height: 4px;
+  background: var(--color-secondary);
+  margin: 15px auto 40px auto;
+  border-radius: 3px;
+}
+
+.register-page form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: 12px;
+  padding: 0 5px;
+}
+
+.register-page .input-group {
+  position: relative;
+  width: 100%;
+  min-height: 75px;
+  display: flex;
+  flex-direction: column;
+}
+.register-page .input-group input {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 0 45px 0 15px;
+  font-size: 20px;
+}
+.register-page .input-group input:focus {
+  border: 1px solid var(--color-secondary);
+  outline: none;
+}
+.register-page .input-icon {
+  position: absolute;
+  right: 15px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+.register-page .error-message {
+  color: var(--color-error);
+  font-size: 16px;
+  text-align: left;
+  min-height: 25px;
+  margin-top: 2px;
+  line-height: 1.4;
+  transition: opacity 0.2s;
+}
+.register-page .error-message:empty {
+  opacity: 0;
+}
+.register-page input.input-error {
+  border: 1px solid var(--color-error) !important;
+}
+
+.register-page .privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+  min-height: 40px;
+  margin-top: 10px;
+  gap: 4px;
+}
+.register-page .privacy a {
+  color: var(--color-secondary);
+}
+.register-page .privacy .checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.register-page .error-privacy {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.register-page button[type="submit"] {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 140px;
+  height: 55px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: center;
+  transition: 0.2s;
+}
+.register-page button[type="submit"]:hover {
+  background: var(--color-secondary);
+}
+
+.register-page .overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.register-page .overlay-content {
+  background-color: var(--color-primary);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 312px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.register-page .overlay-content p {
+  font-size: 20px;
+  color: var(--color-white);
+}
+
+.register-page footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--color-text-secondary);
+}
+.register-page footer a {
+  margin: 0 15px;
+  color: var(--color-text-secondary);
+}
+.register-page footer a:hover {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+@media (max-width: 980px) {
+  .register-page header {
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  .register-page .logo {
+    height: 78px;
+    width: 64px;
+    margin-left: 38px;
+    margin-top: 37px;
+  }
+  .register-page .card {
+    padding: 40px 25px;
+  }
+  .register-page h1 {
+    font-size: 45px;
+  }
+}
+@media (max-width: 480px) {
+  .register-page .card {
+    padding: 30px 6px;
+    border-radius: 20px;
+  }
+  .register-page h1 {
+    font-size: 36px;
+  }
+  .register-page .back-arrow {
+    left: 5px;
+  }
+}

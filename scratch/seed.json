@@ -1,0 +1,70 @@
+{
+  "users": {
+    "user1": {
+      "name": "Test User",
+      "email": "test@test.com",
+      "password": "password123"
+    }
+  },
+  "contacts": {
+    "contact1": {
+      "id": "contact1",
+      "firstname": "Adam",
+      "lastname": "Baranyi",
+      "email": "a.baranyi@be-brave.ch",
+      "phonenumber": "+41 79 123 45 67"
+    },
+    "contact2": {
+      "id": "contact2",
+      "firstname": "John",
+      "lastname": "Doe",
+      "email": "john@example.com",
+      "phonenumber": "+1 234 567 890"
+    },
+    "contact3": {
+      "id": "contact3",
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "email": "jane@example.com",
+      "phonenumber": "+1 987 654 321"
+    }
+  },
+  "tasks": {
+    "task1": {
+      "id": "task1",
+      "title": "Build Architecture",
+      "description": "Set up the initial React structure and routing",
+      "dueDate": "2026-10-01",
+      "category": "Technical Task",
+      "priority": "Urgent",
+      "status": "inProgress",
+      "assignedTo": ["contact1"],
+      "subtasks": [
+        {"title": "Setup Vite", "completed": true},
+        {"title": "Install Router", "completed": false}
+      ]
+    },
+    "task2": {
+      "id": "task2",
+      "title": "Design System",
+      "description": "Create the core CSS variables and components",
+      "dueDate": "2026-09-15",
+      "category": "User Story",
+      "priority": "Medium",
+      "status": "todo",
+      "assignedTo": ["contact1", "contact2"],
+      "subtasks": []
+    },
+    "task3": {
+      "id": "task3",
+      "title": "Review Code",
+      "description": "Review the clean code constraints",
+      "dueDate": "2026-09-10",
+      "category": "Technical Task",
+      "priority": "Low",
+      "status": "done",
+      "assignedTo": ["contact2"],
+      "subtasks": []
+    }
+  }
+}
