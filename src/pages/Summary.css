@@ -1,0 +1,297 @@
+/* ── Summary / Dashboard (scoped unter .summary-content) ─────────────── */
+
+.summary-content {
+  background-color: var(--color-bg);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  padding: 110px 30px 127px 114px;
+  max-width: 1440px;
+}
+
+.summary-content .summary-main-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.summary-content .summary-header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 56px;
+}
+.summary-content .summary-header-container h1 {
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 120%;
+  margin: 0;
+}
+.summary-content .summary-divider {
+  width: 3px;
+  height: 59px;
+  background-color: var(--color-secondary);
+  margin: 0 30px;
+}
+.summary-content .subtitle {
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--color-primary);
+}
+
+.summary-content .metrics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 560px;
+  margin-right: 65px;
+}
+.summary-content .metrics-row {
+  display: flex;
+  gap: 30px;
+}
+
+.summary-content .metric-card {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 38px 58px;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease-in-out,
+    box-shadow 0.08s;
+  height: 168px;
+  width: 264px;
+}
+.summary-content .metric-card:hover {
+  transform: scale(1.05);
+  background-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.summary-content .metric-card:hover .metric-number,
+.summary-content .metric-card:hover .metric-label {
+  color: #fff;
+}
+.summary-content .metric-card:hover .metric-icon-circle {
+  background-color: #fff;
+}
+.summary-content .metric-card:hover .metric-icon-circle img {
+  filter: invert(16%) sepia(33%) saturate(1142%) hue-rotate(176deg)
+    brightness(93%) contrast(90%);
+}
+
+.summary-content .metric-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.summary-content .metric-number {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: center;
+}
+.summary-content .metric-label {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.summary-content .urgent-card {
+  width: 560px;
+  padding: 28px 48px;
+  gap: 61px;
+}
+.summary-content .urgent-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.summary-content .urgent-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.summary-content .urgent-divider {
+  width: 2px;
+  height: 102px;
+  background-color: #d1d1d1;
+}
+.summary-content .urgent-date {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--color-primary);
+  margin-bottom: 5px;
+}
+.summary-content .urgent-label {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--color-primary);
+}
+.summary-content .urgent-card:hover .metric-icon-circle.icon-urgent {
+  background-color: var(--prio-urgent);
+}
+.summary-content .urgent-card:hover .metric-icon-circle.icon-urgent img {
+  filter: none;
+}
+.summary-content .urgent-card:hover .urgent-date,
+.summary-content .urgent-card:hover .urgent-label {
+  color: #fff;
+}
+.summary-content .urgent-card:hover .urgent-divider {
+  background-color: #fff;
+}
+
+.summary-content .small-cards .metric-card {
+  flex-direction: column;
+  flex: 1;
+  height: 168px;
+  padding: 25px;
+}
+
+.summary-content .metric-icon-circle {
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.summary-content .icon-edit,
+.summary-content .icon-check {
+  background-color: var(--color-primary);
+}
+.summary-content .icon-urgent {
+  background-color: var(--prio-urgent);
+}
+.summary-content .metric-icon-circle img {
+  width: 32px;
+  height: 32px;
+}
+
+.summary-content .greeting-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: auto;
+}
+.summary-content #greeting-time {
+  font-size: 47px;
+  font-weight: 500;
+  line-height: 120%;
+  color: var(--color-primary);
+}
+.summary-content #greeting-name {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--color-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .summary-content {
+    padding-left: 30px;
+  }
+  .summary-content .metrics-container {
+    margin-right: 0;
+  }
+}
+@media (max-width: 1260px) {
+  .summary-content .summary-header-container {
+    width: 100%;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .summary-content .summary-main-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .summary-content .greeting-container {
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    order: -1;
+  }
+  .summary-content .metrics-container {
+    width: 100%;
+    max-width: 560px;
+  }
+}
+@media (max-width: 850px) {
+  .summary-content {
+    padding: 16px 16px 90px 16px;
+    height: auto;
+  }
+  .summary-content .greeting-container {
+    display: none;
+  }
+  .summary-content .metrics-row {
+    gap: 8px;
+  }
+  .summary-content .metric-card {
+    flex: 1;
+    width: auto;
+    height: auto;
+    min-height: 80px;
+    padding: 16px 10px;
+  }
+  .summary-content .metrics-row:first-child .metric-card {
+    flex-direction: row;
+  }
+  .summary-content .small-cards .metric-card {
+    height: auto;
+    min-height: 80px;
+    padding: 15px 8px;
+  }
+  .summary-content .metric-number {
+    font-size: 38px;
+  }
+  .summary-content .metric-label {
+    font-size: 16px;
+  }
+  .summary-content .metric-icon-circle {
+    width: 40px;
+    height: 40px;
+  }
+  .summary-content .metric-icon-circle img {
+    width: 20px;
+    height: 20px;
+  }
+  .summary-content .urgent-card {
+    width: 100%;
+    padding: 14px 15px;
+    gap: 10px;
+    justify-content: space-between;
+    min-height: 80px;
+  }
+  .summary-content .urgent-divider {
+    height: 60px;
+  }
+  .summary-content .summary-header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .summary-content .summary-header-container h1 {
+    font-size: 42px;
+  }
+  .summary-content .summary-divider {
+    width: 90px;
+    height: 3px;
+    margin: 5px 0 15px 0;
+  }
+  .summary-content .subtitle {
+    font-size: 18px;
+  }
+}
