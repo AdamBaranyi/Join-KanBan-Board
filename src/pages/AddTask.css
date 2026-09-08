@@ -1,0 +1,45 @@
+.add-task-page {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: calc(100vh - 100px); /* Adjust based on header */
+  overflow-y: auto;
+}
+
+@media (min-width: 800px) {
+  .add-task-page {
+    padding: 64px;
+    align-items: flex-start;
+  }
+}
+
+.add-task-header {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 24px;
+}
+
+.add-task-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+@media (min-width: 800px) {
+  .add-task-header h1 {
+    font-size: 48px;
+  }
+}
+
+.add-task-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 800px) {
+  .add-task-form-wrapper {
+    justify-content: flex-start;
+  }
+}
