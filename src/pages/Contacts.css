@@ -1,0 +1,375 @@
+.contacts-page {
+  display: flex;
+  height: calc(100vh - 100px); /* Adjust based on header */
+  overflow: hidden;
+}
+
+.contacts-list-container {
+  flex: 1;
+  background-color: white;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  box-shadow: 4px 0 6px rgba(0,0,0,0.05);
+  z-index: 2;
+}
+
+@media (min-width: 800px) {
+  .contacts-list-container {
+    max-width: 450px;
+  }
+}
+
+.add-contact-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.add-contact-btn:hover {
+  background: var(--color-secondary);
+}
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-group-header {
+  font-size: 20px;
+  padding-left: 16px;
+}
+
+.contact-group-divider {
+  height: 1px;
+  background-color: #d1d1d1;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-item:hover {
+  background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
+}
+
+.contact-item.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.contact-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 2px solid white;
+}
+
+.contact-badge.large {
+  width: 120px;
+  height: 120px;
+  font-size: 47px;
+  border: 3px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.contact-badge.huge {
+  width: 120px;
+  height: 120px;
+  font-size: 47px;
+  border: 3px solid white;
+  margin-bottom: 24px;
+}
+
+.contact-badge.huge img {
+  width: 60px;
+  height: 60px;
+  filter: brightness(0) invert(1);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-name {
+  font-size: 20px;
+}
+
+.contact-email {
+  color: var(--color-secondary);
+  font-size: 16px;
+}
+
+.contact-item.active .contact-email {
+  color: white;
+}
+
+.contact-details-container {
+  flex: 2;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: var(--color-bg);
+  overflow-y: auto;
+}
+
+@media (min-width: 800px) {
+  .contact-details-container {
+    padding: 64px;
+  }
+}
+
+.contacts-details-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.contacts-details-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header-divider {
+  width: 3px;
+  height: 60px;
+  background-color: var(--color-secondary);
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 27px;
+  color: var(--color-primary);
+}
+
+.contact-details-top {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.contact-details-name-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-details-name-actions h2 {
+  font-size: 47px;
+  margin: 0;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-actions button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.contact-actions button:hover {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.contact-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-details-info h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-row .label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.info-row .value {
+  font-size: 16px;
+}
+
+.info-row .link {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.info-row .link:hover {
+  text-decoration: underline;
+}
+
+/* Modal specific styles */
+.contact-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  max-width: 1000px;
+  width: 90vw;
+}
+
+@media (min-width: 800px) {
+  .contact-modal {
+    flex-direction: row;
+    height: 500px;
+  }
+}
+
+.contact-modal-left {
+  background-color: var(--color-primary);
+  padding: 48px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.modal-logo {
+  width: 55px;
+  margin-bottom: 24px;
+}
+
+.contact-modal-left h2 {
+  font-size: 47px;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.contact-modal-left .subtitle {
+  color: white;
+  font-size: 27px;
+}
+
+.contact-modal-left .divider {
+  width: 90px;
+  height: 3px;
+  background-color: var(--color-secondary);
+  border-radius: 2px;
+  margin-top: 16px;
+}
+
+.contact-modal-right {
+  flex: 1.5;
+  background: white;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 800px) {
+  .contact-modal-right {
+    flex-direction: row;
+    gap: 48px;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.input-with-icon {
+  position: relative;
+  width: 100%;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 12px 21px;
+  padding-right: 48px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  font-size: 20px;
+  outline: none;
+}
+
+.input-with-icon img {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile visibility helpers */
+@media (max-width: 799px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  .show-on-mobile {
+    display: flex !important;
+  }
+  .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 800px) {
+  .show-on-mobile {
+    display: none !important;
+  }
+}
