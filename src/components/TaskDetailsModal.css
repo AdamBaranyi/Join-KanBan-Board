@@ -1,0 +1,170 @@
+.task-details-modal {
+  width: 100%;
+  max-width: 500px;
+  transition: max-width 0.3s ease;
+}
+
+.task-details-modal.is-editing {
+  max-width: 900px;
+}
+
+.task-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.task-details-content .task-category {
+  font-size: 24px;
+  padding: 4px 24px;
+  border-radius: 8px;
+  color: white;
+  align-self: flex-start;
+}
+
+.task-details-content .task-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.task-details-content .task-description {
+  font-size: 20px;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.task-info-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 20px;
+}
+
+.task-info-label {
+  color: var(--color-text-secondary);
+  min-width: 100px;
+}
+
+.task-info-value.priority {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-info-value.priority img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.task-assignees-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assignees-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.assignee-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.contact-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 2px solid white;
+}
+
+.task-subtasks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.subtask-item:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.subtask-item img {
+  width: 24px;
+  height: 24px;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.action-btn:hover {
+  color: var(--color-secondary);
+}
+
+.action-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* change icon color on hover using CSS filter is tricky, we'll just let text change */
+}
+
+.action-divider {
+  width: 1px;
+  height: 24px;
+  background-color: #d1d1d1;
+}
+
+.task-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0 0 0;
+}
