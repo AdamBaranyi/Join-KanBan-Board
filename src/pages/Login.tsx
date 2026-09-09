@@ -102,12 +102,7 @@ export default function Login() {
           </div>
         </div>
 
-        <header className="top-signup-link">
-          <span>Not a Join user?</span>
-          <Link to="/register" className="btn-dark">
-            Sign up
-          </Link>
-        </header>
+
 
         <main className="login-card">
           <h1>Login</h1>
@@ -162,6 +157,13 @@ export default function Login() {
             </div>
           </form>
         </main>
+
+        <header className="top-signup-link">
+          <span>Not a Join user?</span>
+          <Link to="/register" className="btn-dark">
+            Sign up
+          </Link>
+        </header>
 
         <footer className="legal-links">
           <Link to="/privacy">Privacy Policy</Link>

@@ -299,12 +299,18 @@
     width: 100%;
   }
   .login-page .top-signup-link {
-    top: 25px;
-    right: 20px;
-    gap: 0;
+    position: static;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 15px;
   }
   .login-page .top-signup-link span {
-    display: none;
+    display: inline;
+    font-size: 16px;
+  }
+  .login-page .top-signup-link .btn-dark {
+    padding: 10px 20px;
+    font-size: 16px;
   }
   .login-page.no-anim .logo-container {
     top: 30px;
