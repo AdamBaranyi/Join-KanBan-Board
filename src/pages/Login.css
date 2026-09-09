@@ -273,6 +273,25 @@
 
 /* Responsive (kompakt) */
 @media (max-width: 720px) {
+  @keyframes moveLogo {
+    0% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+    }
+    100% {
+      top: 30px;
+      left: 24px;
+      transform: translate(0, 0);
+      width: 80px;
+    }
+  }
+
+  .login-page .login-card {
+    padding: 30px 20px;
+    width: 90%;
+  }
   .login-page .login-card h1 {
     font-size: 47px;
   }
@@ -280,16 +299,35 @@
     width: 100%;
   }
   .login-page .top-signup-link {
-    top: 30px;
-    right: 24px;
-    gap: 16px;
-    font-size: 16px;
+    top: 25px;
+    right: 20px;
+    gap: 0;
   }
   .login-page .top-signup-link span {
-    font-size: 16px;
+    display: none;
   }
   .login-page.no-anim .logo-container {
     top: 30px;
     left: 24px;
+  }
+  .login-page.no-anim .logo-anim {
+    width: 80px;
+  }
+}
+
+@media (max-width: 450px) {
+  .login-page .login-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 15px;
+  }
+  .login-page .login-buttons .btn-dark,
+  .login-page .login-buttons .btn-light {
+    width: 100%;
+    max-width: 100%;
+  }
+  .login-page .login-card h1 {
+    font-size: 36px;
   }
 }
