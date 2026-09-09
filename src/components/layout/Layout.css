@@ -96,11 +96,16 @@
 .header-title {
   font-size: 20px;
   color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 16px;
 }
 .header-icons {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 .help-icon img {
   width: 32px;
@@ -109,6 +114,32 @@
 }
 .help-icon img:hover {
   transform: scale(1.25);
+}
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+}
+.language-switcher button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  padding: 4px;
+  font-weight: 400;
+  transition: all 0.2s;
+}
+.language-switcher button:hover {
+  color: var(--color-secondary);
+}
+.language-switcher button.active {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.language-switcher span {
+  color: #cdcdcd;
 }
 .user-profile-initials {
   width: 56px;

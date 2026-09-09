@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { getData, postData, patchData, deleteData } from "../lib/firebase";
 import { type Contact, contactSchema } from "../lib/schemas";
 import Modal from "../components/Modal";
 import "./Contacts.css";
 
 export default function Contacts() {
+  const { t } = useTranslation();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,7 +69,7 @@ export default function Contacts() {
     setError("");
 
     if (!firstname || !lastname || !email) {
-      setError("Please fill out all required fields.");
+      setError(t("contacts.errorValidation"));
       return;
     }
 
@@ -92,7 +94,7 @@ export default function Contacts() {
       setIsModalOpen(false);
       loadContacts();
     } catch (err) {
-      setError("Failed to save contact.");
+      setError(t("contacts.errorSave"));
       console.error(err);
     }
   };
@@ -123,7 +125,7 @@ export default function Contacts() {
     <main className="content-container contacts-page">
       <div className={`contacts-list-container ${selectedContact ? 'hide-on-mobile' : ''}`}>
         <button className="add-contact-btn" onClick={openAddModal}>
-          Add new contact <img src="/assets/imgs/person_add.svg" alt="Add" />
+          {t("contacts.addNewContact")} <img src="/assets/imgs/person_add.svg" alt="Add" />
         </button>
         <div className="contacts-list">
           {letters.map((letter) => (
@@ -156,9 +158,9 @@ export default function Contacts() {
 
       <div className={`contact-details-container ${!selectedContact ? 'hide-on-mobile' : ''}`}>
         <div className="contacts-details-header">
-          <h1>Contacts</h1>
+          <h1>{t("contacts.title")}</h1>
           <div className="header-divider hide-on-mobile"></div>
-          <span className="subtitle">Better with a team</span>
+          <span className="subtitle">{t("contacts.subtitle")}</span>
           <button 
             className="back-btn show-on-mobile"
             onClick={() => {
@@ -180,29 +182,29 @@ export default function Contacts() {
                 <h2>{selectedContact.firstname} {selectedContact.lastname}</h2>
                 <div className="contact-actions">
                   <button onClick={() => openEditModal(selectedContact)}>
-                    <img src="/assets/imgs/edit.svg" alt="Edit" /> Edit
+                    <img src="/assets/imgs/edit.svg" alt="Edit" /> {t("contacts.edit")}
                   </button>
                   <button onClick={() => handleDeleteContact(selectedContact.id)}>
-                    <img src="/assets/imgs/delete.svg" alt="Delete" /> Delete
+                    <img src="/assets/imgs/delete.svg" alt="Delete" /> {t("contacts.delete")}
                   </button>
                 </div>
               </div>
             </div>
 
             <div className="contact-details-info">
-              <h3>Contact Information</h3>
+              <h3>{t("contacts.contactInfo")}</h3>
               
               <div className="info-row">
-                <span className="label">Email</span>
+                <span className="label">{t("contacts.emailLabel")}</span>
                 <a href={`mailto:${selectedContact.email}`} className="value link">
                   {selectedContact.email}
                 </a>
               </div>
               
               <div className="info-row">
-                <span className="label">Phone</span>
+                <span className="label">{t("contacts.phoneLabel")}</span>
                 <span className="value">
-                  {selectedContact.phonenumber || "Not provided"}
+                  {selectedContact.phonenumber || t("contacts.notProvided")}
                 </span>
               </div>
             </div>
@@ -218,10 +220,10 @@ export default function Contacts() {
               {showMobileMenu && (
                 <div className="mobile-menu">
                   <button onClick={() => { openEditModal(selectedContact); setShowMobileMenu(false); }}>
-                    <img src="/assets/imgs/edit.svg" alt="Edit" /> Edit
+                    <img src="/assets/imgs/edit.svg" alt="Edit" /> {t("contacts.edit")}
                   </button>
                   <button onClick={() => { handleDeleteContact(selectedContact.id); setShowMobileMenu(false); }}>
-                    <img src="/assets/imgs/delete.svg" alt="Delete" /> Delete
+                    <img src="/assets/imgs/delete.svg" alt="Delete" /> {t("contacts.delete")}
                   </button>
                 </div>
               )}
@@ -229,7 +231,7 @@ export default function Contacts() {
           </div>
         ) : (
           <div className="contact-details-placeholder hide-on-mobile">
-            Select a contact to view details.
+            {t("contacts.selectPlaceholder")}
           </div>
         )}
       </div>
@@ -237,8 +239,8 @@ export default function Contacts() {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className="contact-modal">
         <div className="contact-modal-left">
           <img src="/assets/imgs/logo_white.svg" alt="Join logo" className="modal-logo" />
-          <h2>{isEditMode ? "Edit contact" : "Add contact"}</h2>
-          <span className="subtitle">Tasks are better with a team!</span>
+          <h2>{isEditMode ? t("contacts.editContactTitle") : t("contacts.addContactTitle")}</h2>
+          <span className="subtitle">{t("contacts.modalSubtitle")}</span>
           <div className="divider"></div>
         </div>
         <div className="contact-modal-right">
@@ -249,7 +251,7 @@ export default function Contacts() {
             <div className="input-with-icon">
               <input
                 type="text"
-                placeholder="First Name"
+                placeholder={t("contacts.firstNamePlaceholder")}
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
                 required
@@ -260,7 +262,7 @@ export default function Contacts() {
             <div className="input-with-icon">
               <input
                 type="text"
-                placeholder="Last Name"
+                placeholder={t("contacts.lastNamePlaceholder")}
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
                 required
@@ -271,7 +273,7 @@ export default function Contacts() {
             <div className="input-with-icon">
               <input
                 type="email"
-                placeholder="Email"
+                placeholder={t("contacts.emailLabel")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -282,7 +284,7 @@ export default function Contacts() {
             <div className="input-with-icon">
               <input
                 type="tel"
-                placeholder="Phone"
+                placeholder={t("contacts.phoneLabel")}
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -297,10 +299,10 @@ export default function Contacts() {
                 className="btn-secondary"
                 onClick={() => setIsModalOpen(false)}
               >
-                Cancel <img src="/assets/imgs/iconoir_cancel.svg" alt="Cancel" />
+                {t("contacts.cancelBtn")} <img src="/assets/imgs/iconoir_cancel.svg" alt="Cancel" />
               </button>
               <button type="submit" className="btn-primary">
-                {isEditMode ? "Save" : "Create contact"} <img src="/assets/imgs/check.svg" alt="Check" />
+                {isEditMode ? t("contacts.saveBtn") : t("contacts.createBtn")} <img src="/assets/imgs/check.svg" alt="Check" />
               </button>
             </div>
           </form>

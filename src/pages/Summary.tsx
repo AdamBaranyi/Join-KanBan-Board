@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { getData } from "../lib/firebase";
 import { taskSchema, type Task } from "../lib/schemas";
 import { getCurrentUser } from "../lib/session";
@@ -24,23 +25,24 @@ const EMPTY: Metrics = {
 };
 
 /** Tageszeit-abhängige Begrüssung (wie im Original). */
-function greetingByTime(): string {
+function greetingByTime(t: any): string {
   const hour = new Date().getHours();
-  if (hour >= 18) return "Good evening,";
-  if (hour >= 12) return "Good afternoon,";
-  return "Good morning,";
+  if (hour >= 18) return t("summary.greeting.evening");
+  if (hour >= 12) return t("summary.greeting.afternoon");
+  return t("summary.greeting.morning");
 }
 
 export default function Summary() {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const goBoard = () => navigate("/board");
 
   const user = getCurrentUser();
   const isGuestUser = !user || user.name === "Guest";
   const userName = isGuestUser ? "" : user.name;
   const greeting = isGuestUser
-    ? greetingByTime().slice(0, -1) + "!"
-    : greetingByTime();
+    ? greetingByTime(t).slice(0, -1) + "!"
+    : greetingByTime(t);
 
   const [metrics, setMetrics] = useState<Metrics>(EMPTY);
   const [urgentDate, setUrgentDate] = useState("No upcoming deadline");
@@ -92,12 +94,12 @@ export default function Summary() {
         setMetrics(m);
         setUrgentDate(
           earliest
-            ? earliest.toLocaleDateString("en-US", {
+            ? earliest.toLocaleDateString(i18n.language === 'de' ? "de-DE" : "en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })
-            : "No upcoming deadline",
+            : t("summary.noDeadline"),
         );
       } catch (e) {
         console.error("Error loading summary metrics:", e);
@@ -114,7 +116,7 @@ export default function Summary() {
       <div className={`summary-header-container ${!showSplash ? "dashboard-ready" : ""}`}>
         <h1>Join 360</h1>
         <div className="summary-divider"></div>
-        <span className="subtitle">Key Metrics at a Glance</span>
+        <span className="subtitle">{t("summary.subtitle")}</span>
       </div>
 
       <div className="summary-main-wrapper">
@@ -122,21 +124,21 @@ export default function Summary() {
           <div className="metrics-row">
             <div className="metric-card" onClick={goBoard}>
               <div className="metric-icon-circle icon-edit">
-                <img src="/assets/imgs/edit_white.svg" alt="To-do" />
+                <img src="/assets/imgs/edit_white.svg" alt={t("summary.todo")} />
               </div>
               <div className="metric-info">
                 <span className="metric-number">{metrics.todo}</span>
-                <span className="metric-label">To-do</span>
+                <span className="metric-label">{t("summary.todo")}</span>
               </div>
             </div>
 
             <div className="metric-card" onClick={goBoard}>
               <div className="metric-icon-circle icon-check">
-                <img src="/assets/imgs/check.svg" alt="Done" />
+                <img src="/assets/imgs/check.svg" alt={t("summary.done")} />
               </div>
               <div className="metric-info">
                 <span className="metric-number">{metrics.done}</span>
-                <span className="metric-label">Done</span>
+                <span className="metric-label">{t("summary.done")}</span>
               </div>
             </div>
           </div>
@@ -144,17 +146,17 @@ export default function Summary() {
           <div className="metric-card urgent-card" onClick={goBoard}>
             <div className="urgent-left">
               <div className="metric-icon-circle icon-urgent">
-                <img src="/assets/imgs/urgent-icon.png" alt="Urgent" />
+                <img src="/assets/imgs/urgent-icon.png" alt={t("summary.urgent")} />
               </div>
               <div className="metric-info">
                 <span className="metric-number">{metrics.urgent}</span>
-                <span className="metric-label">Urgent</span>
+                <span className="metric-label">{t("summary.urgent")}</span>
               </div>
             </div>
             <div className="urgent-divider"></div>
             <div className="urgent-right">
               <span className="urgent-date">{urgentDate}</span>
-              <span className="urgent-label">Upcoming Deadline</span>
+              <span className="urgent-label">{t("summary.upcomingDeadline")}</span>
             </div>
           </div>
 
@@ -162,25 +164,45 @@ export default function Summary() {
             <div className="metric-card small" onClick={goBoard}>
               <span className="metric-number">{metrics.total}</span>
               <span className="metric-label">
-                Tasks in
+                {t("summary.tasksInBoard").split(' ').slice(0, 2).join(' ')}
                 <br />
-                Board
+                {t("summary.tasksInBoard").split(' ').slice(2).join(' ')}
               </span>
             </div>
             <div className="metric-card small" onClick={goBoard}>
               <span className="metric-number">{metrics.inProgress}</span>
               <span className="metric-label">
-                Tasks In
-                <br />
-                Progress
+                {i18n.language === 'en' ? (
+                  <>
+                    Tasks In
+                    <br />
+                    Progress
+                  </>
+                ) : (
+                  <>
+                    In
+                    <br />
+                    Bearbeitung
+                  </>
+                )}
               </span>
             </div>
             <div className="metric-card small" onClick={goBoard}>
               <span className="metric-number">{metrics.awaitingFeedback}</span>
               <span className="metric-label">
-                Awaiting
-                <br />
-                Feedback
+                {i18n.language === 'en' ? (
+                  <>
+                    Awaiting
+                    <br />
+                    Feedback
+                  </>
+                ) : (
+                  <>
+                    Wartet auf
+                    <br />
+                    Feedback
+                  </>
+                )}
               </span>
             </div>
           </div>

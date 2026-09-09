@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { registerSchema, fieldErrors } from "../lib/schemas";
 import { registerUser } from "../lib/auth";
 import "./Register.css";
@@ -10,6 +11,7 @@ const EYE_OFF = "/assets/imgs/eye-off-line.svg";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,7 +64,7 @@ export default function Register() {
       setTimeout(() => navigate("/"), 1200);
     } catch (e) {
       console.error("Error saving the user:", e);
-      setErrors({ email: "* Registration failed. Please try again later." });
+      setErrors({ email: t("auth.registerError") });
     }
   }
 
@@ -82,7 +84,7 @@ export default function Register() {
                 alt="Back"
               />
             </Link>
-            <h1>Sign up</h1>
+            <h1>{t("auth.registerTitle")}</h1>
           </div>
 
           <div className="underline"></div>
@@ -96,7 +98,7 @@ export default function Register() {
                   setName(e.target.value);
                   clearError("name");
                 }}
-                placeholder="Name"
+                placeholder={t("auth.name")}
                 className={errors.name ? "input-error" : ""}
               />
               <img className="input-icon" src="/assets/imgs/person.svg" alt="" />
@@ -111,7 +113,7 @@ export default function Register() {
                   setEmail(e.target.value);
                   clearError("email");
                 }}
-                placeholder="Email"
+                placeholder={t("auth.email")}
                 autoComplete="username"
                 className={errors.email ? "input-error" : ""}
               />
@@ -127,7 +129,7 @@ export default function Register() {
                   setPassword(e.target.value);
                   clearError("password");
                 }}
-                placeholder="Password"
+                placeholder={t("auth.password")}
                 autoComplete="new-password"
                 className={errors.password ? "input-error" : ""}
               />
@@ -148,7 +150,7 @@ export default function Register() {
                   setConfirmPassword(e.target.value);
                   clearError("confirmPassword");
                 }}
-                placeholder="Confirm Password"
+                placeholder={t("auth.confirmPassword")}
                 autoComplete="new-password"
                 className={errors.confirmPassword ? "input-error" : ""}
               />
@@ -174,27 +176,27 @@ export default function Register() {
                 }}
               />
               <span>
-                I accept the <Link to="/privacy">Privacy policy</Link>
+                {t("auth.accept")} <Link to="/privacy">{t("auth.privacyPolicy")}</Link>
               </span>
               <div className="error-message error-privacy">{errors.privacy}</div>
             </div>
 
-            <button type="submit">Sign up</button>
+            <button type="submit">{t("auth.signup")}</button>
           </form>
         </div>
 
         {success && (
           <div className="overlay">
             <div className="overlay-content">
-              <p>You signed up successfully!</p>
+              <p>{t("auth.registerSuccess")}</p>
             </div>
           </div>
         )}
       </main>
 
       <footer>
-        <Link to="/privacy">Privacy Policy</Link>
-        <Link to="/legal">Legal notice</Link>
+        <Link to="/privacy">{t("header.privacy")}</Link>
+        <Link to="/legal">{t("header.legal")}</Link>
       </footer>
     </div>
   );

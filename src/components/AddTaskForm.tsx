@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { postData, patchData, getData } from "../lib/firebase";
 import type {
   Task,
@@ -24,6 +25,7 @@ export default function AddTaskForm({
   onTaskUpdated,
   onCancel,
 }: AddTaskFormProps) {
+  const { t } = useTranslation();
   const [title, setTitle] = useState(initialTask?.title ?? "");
   const [description, setDescription] = useState(initialTask?.description ?? "");
   const [dueDate, setDueDate] = useState(initialTask?.dueDate ?? "");
@@ -79,7 +81,7 @@ export default function AddTaskForm({
     setError("");
 
     if (!title.trim() || !dueDate.trim() || !category) {
-      setError("Title, Due Date, and Category are required.");
+      setError(t("addTask.errorValidation"));
       return;
     }
 
@@ -108,7 +110,7 @@ export default function AddTaskForm({
         if (onTaskAdded) onTaskAdded(createdTask);
       }
     } catch (err) {
-      setError("Failed to save task.");
+      setError(t("addTask.errorSave"));
       console.error(err);
     }
   };
@@ -120,33 +122,33 @@ export default function AddTaskForm({
           {/* Left Column */}
           <div className="form-left">
             <div className="form-group">
-              <label>Title<span className="required">*</span></label>
+              <label>{t("addTask.titleLabel")}<span className="required">*</span></label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter a title"
+                placeholder={t("addTask.titlePlaceholder")}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label>Description</label>
+              <label>{t("addTask.descLabel")}</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Enter a Description"
+                placeholder={t("addTask.descPlaceholder")}
               />
             </div>
 
             <div className="form-group">
-              <label>Assigned to</label>
+              <label>{t("addTask.assignedToLabel")}</label>
               <div className="custom-select-container">
                 <div
                   className="custom-select-header"
                   onClick={() => setContactsOpen(!contactsOpen)}
                 >
-                  Select contacts to assign
+                  {t("addTask.selectContacts")}
                   <img
                     src={`/assets/imgs/arrow_drop_downaa.svg`}
                     alt="toggle"
@@ -191,7 +193,7 @@ export default function AddTaskForm({
           {/* Right Column */}
           <div className="form-right">
             <div className="form-group">
-              <label>Due date<span className="required">*</span></label>
+              <label>{t("addTask.dueDateLabel")}<span className="required">*</span></label>
               <input
                 type="date"
                 value={dueDate}
@@ -201,7 +203,7 @@ export default function AddTaskForm({
             </div>
 
             <div className="form-group">
-              <label>Prio</label>
+              <label>{t("addTask.prioLabel")}</label>
               <div className="prio-buttons">
                 <button
                   type="button"
@@ -210,7 +212,7 @@ export default function AddTaskForm({
                   }`}
                   onClick={() => setPriority("Urgent")}
                 >
-                  Urgent <img src="/assets/imgs/urgent-priority-board.svg" alt="Urgent" />
+                  {t("addTask.urgent")} <img src="/assets/imgs/urgent-priority-board.svg" alt="Urgent" />
                 </button>
                 <button
                   type="button"
@@ -219,7 +221,7 @@ export default function AddTaskForm({
                   }`}
                   onClick={() => setPriority("Medium")}
                 >
-                  Medium{" "}
+                  {t("addTask.medium")}{" "}
                   <img src="/assets/imgs/priority_medium.svg" alt="Medium" />
                 </button>
                 <button
@@ -229,31 +231,31 @@ export default function AddTaskForm({
                   }`}
                   onClick={() => setPriority("Low")}
                 >
-                  Low <img src="/assets/imgs/low-priority-board.svg" alt="Low" />
+                  {t("addTask.low")} <img src="/assets/imgs/low-priority-board.svg" alt="Low" />
                 </button>
               </div>
             </div>
 
             <div className="form-group">
-              <label>Category<span className="required">*</span></label>
+              <label>{t("addTask.categoryLabel")}<span className="required">*</span></label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as TaskCategory)}
                 required
               >
-                <option value="Technical Task">Technical Task</option>
-                <option value="User Story">User Story</option>
+                <option value="Technical Task">{t("addTask.technicalTask")}</option>
+                <option value="User Story">{t("addTask.userStory")}</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label>Subtasks</label>
+              <label>{t("addTask.subtasksLabel")}</label>
               <div className="subtask-input-container">
                 <input
                   type="text"
                   value={newSubtaskTitle}
                   onChange={(e) => setNewSubtaskTitle(e.target.value)}
-                  placeholder="Add new subtask"
+                  placeholder={t("addTask.newSubtaskPlaceholder")}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
@@ -281,7 +283,7 @@ export default function AddTaskForm({
 
         <div className="form-footer">
           <div className="form-required-info">
-            <span className="required">*</span>This field is required
+            <span className="required">*</span>{t("addTask.requiredInfo")}
           </div>
           <div className="form-actions">
             <button
@@ -291,10 +293,10 @@ export default function AddTaskForm({
                 if (onCancel) onCancel();
               }}
             >
-              Clear <img src="/assets/imgs/iconoir_cancel.svg" alt="Clear" />
+              {t("addTask.clearBtn")} <img src="/assets/imgs/iconoir_cancel.svg" alt="Clear" />
             </button>
             <button type="submit" className="btn-primary">
-              {initialTask ? "Save Task" : "Create Task"} <img src="/assets/imgs/check.svg" alt="Save" />
+              {initialTask ? t("addTask.saveBtn") : t("addTask.createBtn")} <img src="/assets/imgs/check.svg" alt="Save" />
             </button>
           </div>
         </div>
@@ -302,7 +304,7 @@ export default function AddTaskForm({
         {error && <div className="form-error">{error}</div>}
         {success && (
           <div className="form-success-overlay">
-            {initialTask ? "Task updated" : "Task added to board"}
+            {initialTask ? t("addTask.taskUpdated") : t("addTask.taskAdded")}
             <img src="/assets/imgs/Board.svg" alt="Board" />
           </div>
         )}

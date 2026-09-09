@@ -24,14 +24,15 @@ import TaskCard from "../components/TaskCard";
 import TaskDetailsModal from "../components/TaskDetailsModal";
 import Modal from "../components/Modal";
 import AddTaskForm from "../components/AddTaskForm";
+import { useTranslation } from "react-i18next";
 import "./Board.css";
 import { useDroppable } from "@dnd-kit/core";
 
-const COLUMNS: { id: TaskStatus; title: string }[] = [
-  { id: "todo", title: "To do" },
-  { id: "inProgress", title: "In progress" },
-  { id: "awaitingFeedback", title: "Await feedback" },
-  { id: "done", title: "Done" },
+const COLUMNS = [
+  { id: "todo" as TaskStatus, tKey: "board.columns.todo" },
+  { id: "inProgress" as TaskStatus, tKey: "board.columns.inProgress" },
+  { id: "awaitingFeedback" as TaskStatus, tKey: "board.columns.awaitingFeedback" },
+  { id: "done" as TaskStatus, tKey: "board.columns.done" },
 ];
 
 function BoardColumn({
@@ -49,6 +50,7 @@ function BoardColumn({
   onTaskClick: (task: Task) => void;
   onMoveTask: (task: Task, newStatus: TaskStatus) => void;
 }) {
+  const { t } = useTranslation();
   const { setNodeRef } = useDroppable({
     id: col.id,
     data: {
@@ -78,7 +80,7 @@ function BoardColumn({
           <div className="sortable-list">
             {tasks.length === 0 ? (
               <div className="empty-column-placeholder">
-                No tasks {col.title}
+                {t("board.noTasks")} {col.title}
               </div>
             ) : (
               tasks.map((task) => (
@@ -99,6 +101,7 @@ function BoardColumn({
 }
 
 export default function Board() {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -236,13 +239,13 @@ export default function Board() {
     <main className="content-container board-page">
       <div className="board-header-row">
         <div className="board-header-left">
-          <h1>Board</h1>
+          <h1>{t("board.title")}</h1>
         </div>
         <div className="board-header-right">
           <div className="board-search">
             <input
               type="text"
-              placeholder="Find Task"
+              placeholder={t("board.findTask")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -256,7 +259,7 @@ export default function Board() {
               setIsAddTaskOpen(true);
             }}
           >
-            Add task <img src="/assets/imgs/add.png" alt="Add" />
+            {t("board.addTask")} <img src="/assets/imgs/add.png" alt="Add" />
           </button>
         </div>
       </div>
@@ -269,10 +272,15 @@ export default function Board() {
         onDragEnd={handleDragEnd}
       >
         <div className="board-columns">
-          {COLUMNS.map((col) => {
+          {COLUMNS.map((colConfig) => {
             const columnTasks = filteredTasks.filter(
-              (t) => t.status === col.id
+              (t) => t.status === colConfig.id
             );
+            
+            const col = {
+              id: colConfig.id,
+              title: t(colConfig.tKey)
+            };
 
             return (
               <BoardColumn
@@ -324,7 +332,7 @@ export default function Board() {
         className="add-task-modal-wrapper"
       >
         <div className="modal-add-task-header">
-          <h2>Add Task</h2>
+          <h2>{t("board.addTaskModal")}</h2>
         </div>
         <AddTaskForm
           initialStatus={addTaskStatus}
