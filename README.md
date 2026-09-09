@@ -38,7 +38,8 @@ This project is a React modernization of the original Vanilla JS Join applicatio
 
 ### Prerequisites
 - Node.js (v18 or higher recommended)
-- npm or yarn
+- [Bun](https://bun.sh/) (Highly recommended for lightning-fast installs and ultra-fast dev server startup)
+- npm or yarn (if you choose not to use Bun)
 
 ### Installation
 
@@ -49,6 +50,11 @@ This project is a React modernization of the original Vanilla JS Join applicatio
    ```
 
 2. **Install dependencies**
+   Using Bun (Recommended):
+   ```bash
+   bun install
+   ```
+   Or using npm:
    ```bash
    npm install
    ```
@@ -60,6 +66,11 @@ This project is a React modernization of the original Vanilla JS Join applicatio
    ```
 
 4. **Start the Development Server**
+   Using Bun (Recommended for faster cold starts):
+   ```bash
+   bun run dev
+   ```
+   Or using npm:
    ```bash
    npm run dev
    ```
