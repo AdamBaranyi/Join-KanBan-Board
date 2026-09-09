@@ -120,7 +120,7 @@ export default function Contacts() {
   const letters = Object.keys(groupedContacts).sort();
 
   return (
-    <main className="contacts-page">
+    <main className="content-container contacts-page">
       <div className={`contacts-list-container ${selectedContact ? 'hide-on-mobile' : ''}`}>
         <button className="add-contact-btn" onClick={openAddModal}>
           Add new contact <img src="/assets/imgs/person_add.svg" alt="Add" />

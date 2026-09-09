@@ -4,6 +4,13 @@
   width: 100%;
   max-width: 900px;
   position: relative;
+  padding: 24px;
+}
+
+@media (min-width: 800px) {
+  .add-task-form-container {
+    padding: 48px;
+  }
 }
 
 .add-task-form {
