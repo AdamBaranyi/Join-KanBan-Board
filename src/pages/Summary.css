@@ -164,6 +164,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 .summary-content .icon-edit,
 .summary-content .icon-check {
