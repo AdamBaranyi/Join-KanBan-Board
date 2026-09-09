@@ -9,6 +9,7 @@ export default function Contacts() {
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Form state
   const [firstname, setFirstname] = useState("");
@@ -160,7 +161,10 @@ export default function Contacts() {
           <span className="subtitle">Better with a team</span>
           <button 
             className="back-btn show-on-mobile"
-            onClick={() => setSelectedContact(null)}
+            onClick={() => {
+              setSelectedContact(null);
+              setShowMobileMenu(false);
+            }}
           >
             <img src="/assets/imgs/arrow_left_line_hover.svg" alt="Back" />
           </button>
@@ -201,6 +205,26 @@ export default function Contacts() {
                   {selectedContact.phonenumber || "Not provided"}
                 </span>
               </div>
+            </div>
+            
+            <div className="mobile-edit-wrapper show-on-mobile">
+              <div 
+                className="mobile-edit-container"
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
+                <img src="/assets/imgs/Menu Contact options.png" alt="Options" />
+              </div>
+              
+              {showMobileMenu && (
+                <div className="mobile-menu">
+                  <button onClick={() => { openEditModal(selectedContact); setShowMobileMenu(false); }}>
+                    <img src="/assets/imgs/edit.svg" alt="Edit" /> Edit
+                  </button>
+                  <button onClick={() => { handleDeleteContact(selectedContact.id); setShowMobileMenu(false); }}>
+                    <img src="/assets/imgs/delete.svg" alt="Delete" /> Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ) : (

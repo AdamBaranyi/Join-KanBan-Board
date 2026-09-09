@@ -15,7 +15,7 @@ import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
 } from "@dnd-kit/sortable";
 
 import { getData, patchData } from "../lib/firebase";
@@ -40,12 +40,14 @@ function BoardColumn({
   contacts,
   onAddTask,
   onTaskClick,
+  onMoveTask,
 }: {
   col: { id: TaskStatus; title: string };
   tasks: Task[];
   contacts: Contact[];
   onAddTask: (status: TaskStatus) => void;
   onTaskClick: (task: Task) => void;
+  onMoveTask: (task: Task, newStatus: TaskStatus) => void;
 }) {
   const { setNodeRef } = useDroppable({
     id: col.id,
@@ -71,7 +73,7 @@ function BoardColumn({
         <SortableContext
           id={col.id}
           items={tasks.map((t) => t.id)}
-          strategy={verticalListSortingStrategy}
+          strategy={rectSortingStrategy}
         >
           <div className="sortable-list">
             {tasks.length === 0 ? (
@@ -85,6 +87,7 @@ function BoardColumn({
                   task={task}
                   contacts={contacts}
                   onClick={() => onTaskClick(task)}
+                  onMoveTask={onMoveTask}
                 />
               ))
             )}
@@ -148,6 +151,17 @@ export default function Board() {
       active = false;
     };
   }, []);
+
+  const handleMoveTask = async (task: Task, newStatus: TaskStatus) => {
+    try {
+      await patchData(`tasks/${task.id}`, { status: newStatus });
+      setTasks((prev) =>
+        prev.map((t) => (t.id === task.id ? { ...t, status: newStatus } : t))
+      );
+    } catch (err) {
+      console.error("Failed to move task", err);
+    }
+  };
 
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
@@ -271,6 +285,7 @@ export default function Board() {
                   setIsAddTaskOpen(true);
                 }}
                 onTaskClick={(task) => setSelectedTask(task)}
+                onMoveTask={handleMoveTask}
               />
             );
           })}

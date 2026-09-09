@@ -228,13 +228,129 @@
     max-width: 560px;
   }
 }
+
+/* Short Desktop (max-height: 800px) */
+@media (max-height: 800px) {
+  .summary-content .summary-header-container {
+    margin-bottom: 20px;
+  }
+  .summary-content .summary-header-container h1 {
+    font-size: 48px;
+  }
+  .summary-content .metrics-container {
+    gap: 15px;
+  }
+  .summary-content .metrics-row {
+    gap: 15px;
+  }
+  .summary-content .metric-card {
+    padding: 20px;
+    height: 140px;
+  }
+  .summary-content .urgent-card {
+    padding: 10px 30px;
+    gap: 30px;
+  }
+  .summary-content .small-cards .metric-card {
+    height: 140px;
+  }
+  .summary-content .metric-number {
+    font-size: 48px;
+  }
+  .summary-content #greeting-time {
+    font-size: 36px;
+  }
+  .summary-content #greeting-name {
+    font-size: 48px;
+  }
+}
+
+/* Very Short Screen (max-height: 600px) */
+@media (max-height: 600px) {
+  .summary-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .summary-content .summary-header-container {
+    margin-bottom: 10px;
+  }
+  .summary-content .summary-header-container h1 {
+    font-size: 36px;
+  }
+  .summary-content .metric-card {
+    padding: 10px;
+    height: 100px;
+  }
+  .summary-content .small-cards .metric-card {
+    height: 100px;
+  }
+  .summary-content .metric-number {
+    font-size: 36px;
+  }
+  .summary-content .metric-label {
+    font-size: 16px;
+    margin-top: 0;
+  }
+  .summary-content .metric-icon-circle {
+    width: 50px;
+    height: 50px;
+  }
+  .summary-content .metric-icon-circle img {
+    width: 20px;
+    height: 20px;
+  }
+  .summary-content .urgent-divider {
+    height: 60px;
+  }
+}
 @media (max-width: 850px) {
   .summary-content {
     padding: 16px 16px 90px 16px;
     height: auto;
   }
+  .summary-content.splash-active {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--header-height));
+    overflow: hidden;
+  }
+  .summary-content.splash-active .summary-main-wrapper {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .summary-content .summary-header-container {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    width: 100%;
+  }
+  .summary-content .metrics-container {
+    display: none;
+    width: 100%;
+  }
+  .summary-content .summary-header-container.dashboard-ready,
+  .summary-content .metrics-container.dashboard-ready {
+    display: flex;
+  }
   .summary-content .greeting-container {
     display: none;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .summary-content.splash-active .greeting-container {
+    display: flex;
+  }
+  .summary-content #greeting-time {
+    font-size: 36px;
+  }
+  .summary-content #greeting-name {
+    font-size: 47px;
   }
   .summary-content .metrics-row {
     gap: 8px;
@@ -278,10 +394,8 @@
   .summary-content .urgent-divider {
     height: 60px;
   }
-  .summary-content .summary-header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 14px;
+  .summary-content .urgent-divider {
+    height: 60px;
   }
   .summary-content .summary-header-container h1 {
     font-size: 42px;

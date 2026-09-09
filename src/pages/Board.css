@@ -103,7 +103,7 @@
   flex: 1;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1375px) {
   .board-columns {
     flex-direction: row;
     overflow-x: auto;
@@ -164,6 +164,26 @@
   flex-direction: column;
   gap: 16px;
   min-height: 150px;
+}
+
+@media (max-width: 1374px) {
+  .sortable-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 12px; /* space for scrollbar */
+    padding-right: 16px;
+    align-items: stretch;
+  }
+  
+  .sortable-list .task-card {
+    min-width: 250px;
+    max-width: 250px;
+  }
+
+  .empty-column-placeholder {
+    min-width: 250px;
+    width: 100%;
+  }
 }
 
 .empty-column-placeholder {

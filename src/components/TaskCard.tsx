@@ -1,15 +1,17 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { Task, Contact } from "../lib/schemas";
+import type { Task, Contact, TaskStatus } from "../lib/schemas";
 import "./TaskCard.css";
 
 type TaskCardProps = {
   task: Task;
   contacts: Contact[];
   onClick: () => void;
+  onMoveTask?: (task: Task, newStatus: TaskStatus) => void;
 };
 
-export default function TaskCard({ task, contacts, onClick }: TaskCardProps) {
+export default function TaskCard({ task, contacts, onClick, onMoveTask }: TaskCardProps) {
+  const [showMoveMenu, setShowMoveMenu] = useState(false);
   const {
     attributes,
     listeners,
@@ -49,8 +51,31 @@ export default function TaskCard({ task, contacts, onClick }: TaskCardProps) {
         }
       }}
     >
-      <div className={`task-category ${task.category === 'User Story' ? 'user-story' : 'technical-task'}`}>
-        {task.category}
+      <div className="task-header-row">
+        <div className={`task-category ${task.category === 'User Story' ? 'user-story' : 'technical-task'}`}>
+          {task.category}
+        </div>
+        {onMoveTask && (
+          <div className="mobile-move-wrapper">
+            <button 
+              className="mobile-move-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowMoveMenu(!showMoveMenu);
+              }}
+            >
+              <img src="/assets/imgs/Menu Contact options.png" alt="Move" />
+            </button>
+            {showMoveMenu && (
+              <div className="mobile-move-menu">
+                {task.status !== "todo" && <button onClick={(e) => { e.stopPropagation(); onMoveTask(task, "todo"); setShowMoveMenu(false); }}>To do</button>}
+                {task.status !== "inProgress" && <button onClick={(e) => { e.stopPropagation(); onMoveTask(task, "inProgress"); setShowMoveMenu(false); }}>In progress</button>}
+                {task.status !== "awaitingFeedback" && <button onClick={(e) => { e.stopPropagation(); onMoveTask(task, "awaitingFeedback"); setShowMoveMenu(false); }}>Await feedback</button>}
+                {task.status !== "done" && <button onClick={(e) => { e.stopPropagation(); onMoveTask(task, "done"); setShowMoveMenu(false); }}>Done</button>}
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <h3 className="task-title">{task.title}</h3>
       <p className="task-description">{task.description}</p>

@@ -54,6 +54,13 @@ import fs from 'fs';
     fs.mkdirSync('scratch/mobile');
   }
 
+  // Clear localStorage to see animation (or lack thereof)
+  await page.evaluate(() => localStorage.clear());
+
+  await page.goto('http://localhost:5180/');
+  await new Promise(r => setTimeout(r, 2000));
+  await page.screenshot({ path: 'scratch/mobile/login.png' });
+
   await page.goto('http://localhost:5180/summary');
   await new Promise(r => setTimeout(r, 2000));
   await page.screenshot({ path: 'scratch/mobile/summary.png' });

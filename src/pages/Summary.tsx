@@ -44,6 +44,18 @@ export default function Summary() {
 
   const [metrics, setMetrics] = useState<Metrics>(EMPTY);
   const [urgentDate, setUrgentDate] = useState("No upcoming deadline");
+  const [showSplash, setShowSplash] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth <= 850 && !sessionStorage.getItem("summarySplashPlayed")) {
+      setShowSplash(true);
+      sessionStorage.setItem("summarySplashPlayed", "true");
+      const timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -98,15 +110,15 @@ export default function Summary() {
   }, []);
 
   return (
-    <main className="content-container summary-content">
-      <div className="summary-header-container">
+    <main className={`content-container summary-content ${showSplash ? "splash-active" : ""}`}>
+      <div className={`summary-header-container ${!showSplash ? "dashboard-ready" : ""}`}>
         <h1>Join 360</h1>
         <div className="summary-divider"></div>
         <span className="subtitle">Key Metrics at a Glance</span>
       </div>
 
       <div className="summary-main-wrapper">
-        <section className="metrics-container">
+        <section className={`metrics-container ${!showSplash ? "dashboard-ready" : ""}`}>
           <div className="metrics-row">
             <div className="metric-card" onClick={goBoard}>
               <div className="metric-icon-circle icon-edit">
