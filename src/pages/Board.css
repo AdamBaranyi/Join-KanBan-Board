@@ -85,6 +85,15 @@
 
 .add-task-btn {
   white-space: nowrap;
+  justify-content: center;
+}
+
+@media (max-width: 599px) {
+  .board-search,
+  .add-task-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .board-columns {

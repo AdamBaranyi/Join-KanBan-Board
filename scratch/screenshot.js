@@ -49,9 +49,26 @@ import fs from 'fs';
 
   // Now let's test a mobile view (320px)
   await page.setViewport({ width: 320, height: 800 });
+  
+  if (!fs.existsSync('scratch/mobile')) {
+    fs.mkdirSync('scratch/mobile');
+  }
+
+  await page.goto('http://localhost:5180/summary');
+  await new Promise(r => setTimeout(r, 2000));
+  await page.screenshot({ path: 'scratch/mobile/summary.png' });
+
   await page.goto('http://localhost:5180/board');
   await new Promise(r => setTimeout(r, 2000));
-  await page.screenshot({ path: 'public/screenshots/board-mobile.png' });
+  await page.screenshot({ path: 'scratch/mobile/board.png' });
+
+  await page.goto('http://localhost:5180/add-task');
+  await new Promise(r => setTimeout(r, 2000));
+  await page.screenshot({ path: 'scratch/mobile/add-task.png' });
+
+  await page.goto('http://localhost:5180/contacts');
+  await new Promise(r => setTimeout(r, 2000));
+  await page.screenshot({ path: 'scratch/mobile/contacts.png' });
 
   await browser.close();
   console.log("Screenshots captured!");
